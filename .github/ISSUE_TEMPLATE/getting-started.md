@@ -2,9 +2,13 @@
 name: Getting started
 about: Anything related to the getting started label
 title: 'Getting Started: '
-labels: getting started
+labels: getting started, new
 assignees: kchevali
 
 ---
 
 **Description**
+
+
+**Tasks**
+- [ ]

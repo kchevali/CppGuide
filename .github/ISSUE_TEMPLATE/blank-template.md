@@ -2,9 +2,13 @@
 name: Blank template
 about: Standard issue template
 title: ''
-labels: ''
+labels: new
 assignees: kchevali
 
 ---
 
 **Description**
+
+
+**Tasks**
+- [ ]
