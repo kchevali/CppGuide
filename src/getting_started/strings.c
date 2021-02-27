@@ -77,7 +77,7 @@ int main() {
   // Join PART of a string to another (coNCATenate).
   // Make sure the destination string has space to hold the new chars.
   // Syntax: strncat(destinationString, sourceString, length);
-  // Example: strncat("abc","def"); "abc" -> "abcdef"
+  // Example: strncat("abc","def", 1); "abc" -> "abcd"
   char shortWord[startLength + endLength];
   strncat(shortWord, start, 2);
   strncat(shortWord, end, 1);
