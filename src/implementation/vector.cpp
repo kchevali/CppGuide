@@ -16,12 +16,12 @@ class Vector {
   Vector() { allocate(0); }
   Vector(int length, const ValType& defaultVal) : length(length) {
     allocate(3 * length / 2);
-    fill(defaultVal);
+    fill(begin(), end(), defaultVal);
   }
   Vector(int length) : length(length) { allocate(3 * length / 2); }
   Vector(const Vector& that) : length(that.length) {
     allocate(that.cap);
-    copy(that.data);
+    copyData(that.data);
   }
   Vector(Vector&& that) { move(that); }
 
@@ -45,19 +45,19 @@ class Vector {
     return data[index];
   }
 
-  void fill(const ValType& val) {
-    for (int i = 0; i < length; i++) data[i] = val;
+  void fill(Iterator&& begin, const Iterator& end, const ValType& val) {
+    while (begin != end) *(begin++) = val;
   }
+  void fill(const Iterator& begin, const Iterator& end, const ValType& val) { return fill(Iterator(begin), end, val); }
 
-  void iota(ValType&& val) {
-    for (int i = 0; i < length; i++) data[i] = val++;
+  void iota(Iterator&& begin, const Iterator& end, ValType&& val) {
+    while (begin != end) *(begin++) = val++;
   }
-
-  void iota(const ValType& val) { return iota(ValType(val)); }
+  void iota(const Iterator& begin, const Iterator& end, const ValType& val) { return iota(Iterator(begin), end, ValType(val)); }
 
   void clear() { length = 0; }
 
-  void push_back(ValType& val) {
+  void push_back(const ValType& val) {
     if (length >= cap) reallocate();
     data[length++] = val;
   }
@@ -88,7 +88,7 @@ class Vector {
   }
 
  private:
-  void copy(const ValType* that) {
+  void copyData(const ValType* that) {
     for (size_t i = 0; i < length; i++) data[i] = that[i];
   }
 
@@ -98,7 +98,7 @@ class Vector {
       delete[] data;
       allocate(that.cap);
     }
-    copy(that.data);
+    copyData(that.data);
   }
 
   void move(Vector& that) {
@@ -128,13 +128,16 @@ class Vector {
 };
 
 int main() {
-  Vector<int> v(2, 1);
-  for (int i = 2; i < 30; i++) {
-    v.push_back(v[i - 1] + v[i - 2]);
+  Vector<int> a;
+
+  for (int i = 10; i >= 0; i--) {
+    a.push_back(i);
   }
 
-  for (int num : v) {
-    printf("%d\n", num);
+  a.fill(a.begin() + 1, a.begin() + 4, 99);
+
+  for (int x : a) {
+    printf("%d\n", x);
   }
 }
 #endif
