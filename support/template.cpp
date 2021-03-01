@@ -19,6 +19,11 @@
 
 */
 
+#include <stdio.h>
+
 int main() {
   // Examples
+
+  // Outputting links for further learning.
+  printf("\n\n*Learn more*\n============\n-name: link\n");
 }

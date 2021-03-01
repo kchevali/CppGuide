@@ -28,5 +28,5 @@ int main() {
   printf("Hello World!");
 
   // Outputting links for further learning.
-  printf("\n\n*Learn more*\n============\n-string: src/getting_started/01_strings.c\n-printf(): src/getting_started/02_io.c\n");
+  printf("\n\n*Learn more*\n============\n-string: src/getting_started/strings.c\n-printf(): src/getting_started/io.c\n");
 }
