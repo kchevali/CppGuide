@@ -5,13 +5,13 @@
 #include <cstdio>
 #include <stdexcept>
 
-// #include "ptr_it.cpp"
+#include "ptr_it.cpp"
 
 template <class ValType>
 class Vector {
  public:
-  // using Iterator = PointerIterator<ValType>;
-  // using ConstIterator = PointerIterator<const ValType>;
+  using Iterator = PointerIterator<ValType>;
+  using ConstIterator = PointerIterator<const ValType>;
 
   Vector() { allocate(0); }
   Vector(int length, const ValType& defaultVal) : length(length) {
@@ -26,12 +26,10 @@ class Vector {
   Vector(Vector&& that) { move(that); }
 
   Vector& operator=(const Vector& that) {
-    printf("COPY=\n");
     copy(that);
     return *this;
   }
   Vector& operator=(Vector&& that) {
-    printf("MOVE=\n");
     move(that);
     return *this;
   }
@@ -74,11 +72,11 @@ class Vector {
     return data[--length];
   }
 
-  // Iterator begin() { return Iterator(data); }
-  // ConstIterator begin() const { return ConstIterator(data); }
+  Iterator begin() { return Iterator(data); }
+  ConstIterator begin() const { return ConstIterator(data); }
 
-  // Iterator end() { return Iterator(data + S); }
-  // ConstIterator end() const { return ConstIterator(data + S); }
+  Iterator end() { return Iterator(data + length); }
+  ConstIterator end() const { return ConstIterator(data + length); }
 
   size_t size() const { return length; }
   size_t capacity() const { return cap; }
@@ -115,7 +113,6 @@ class Vector {
   void allocate(size_t cap) {
     this->cap = std::max(10UL, cap);
     data = new ValType[this->cap];
-    printf("Allocating: %zu\n", this->cap);
   }
 
   void reallocate() {
@@ -131,14 +128,13 @@ class Vector {
 };
 
 int main() {
-  Vector<long long> v(2, 1);
+  Vector<int> v(2, 1);
   for (int i = 2; i < 30; i++) {
     v.push_back(v[i - 1] + v[i - 2]);
   }
-  Vector<long long> v2(v);
 
-  for (int i = v2.size() - 10; i < v2.size(); i++) {
-    printf("[%d] %lld\n", i, v2[i]);
+  for (int num : v) {
+    printf("%d\n", num);
   }
 }
 #endif
