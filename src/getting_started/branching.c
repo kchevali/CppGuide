@@ -35,6 +35,7 @@
   - 'else': the previous statements are not true -> run code (optional; used last; only once).
   - Branching is similar to loops, where conditions are used determine how many times to run the code.
   - Switch statements function similar to branching, but compares a single statement to several cases.
+  - The '{}' in a branching statement are used to define the scope or lifetime of a variable.
 
 */
 
